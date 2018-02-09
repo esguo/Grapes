@@ -107,6 +107,7 @@
       signoutButton.style.display = 'block';
       submitButton.style.display = 'block';
       getNames();
+      listMajors();
       // parseResult(result);
     } else {
       authorizeButton.style.display = 'block';
@@ -220,8 +221,8 @@
   */
   function listMajors() {
     gapi.client.sheets.spreadsheets.values.get({
-      spreadsheetId: '1BxiMVs0XRA5nFMdKvBdBZjgmUUqptlbs74OgvE2upms',
-      range: 'Class Data!A2:E',
+      spreadsheetId: ''1YY9dLjVEgaYl9HAvre1MvUHQUyxsGjNoKgAxYIRAaIA'',
+      range: ''Form Responses 1!B:D',
     }).then(function(response) {
       var range = response.result;
       if (range.values.length > 0) {
