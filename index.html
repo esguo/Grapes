@@ -221,7 +221,7 @@
   */
   function listMajors() {
     gapi.client.sheets.spreadsheets.values.get({
-      spreadsheetId: ''1YY9dLjVEgaYl9HAvre1MvUHQUyxsGjNoKgAxYIRAaIA'',
+      spreadsheetId: '1YY9dLjVEgaYl9HAvre1MvUHQUyxsGjNoKgAxYIRAaIA',
       range: ''Form Responses 1!B:D',
     }).then(function(response) {
       var range = response.result;
