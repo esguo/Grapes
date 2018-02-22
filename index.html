@@ -4,14 +4,12 @@
   <title>IAATK Prototype for Autocomplete</title>
   <meta charset='utf-8' />
   <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+  <link rel="stylesheet" type="text/css" href="styles.css">
   <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
   <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
   <style>
   * {
     box-sizing: border-box;
-  }
-  body {
-    font: 16px Arial;
   }
   input {
     border: 1px solid transparent;
@@ -19,25 +17,35 @@
     padding: 10px;
     font-size: 16px;
   }
-</style>
+  </style>
 </head>
 
 
 <body>
-  <p>Demo Autocomplete</p>
+  <h1>Smart Search Protoype</h1>
 
   <!--Add buttons to initiate auth sequence and sign out-->
   <button id="authorize-button" style="display: none;">Authorize</button>
-  <button id="signout-button" style="display: none;">Sign Out</button>
-
-  <pre id="content"></pre>
 
   <div class="ui-widget">
-    <label for="name">Name: </label>
+    <label for="name">Search: </label>
     <input id="name">
-    <button id="submit-button" style="display: none;">Submit</button>
+    <button id="submit-button" style="display:none">Submit</button>
   </div>
 
+  <h4 id="content"></h4>
+
+  <div style="overflow: auto">
+    <table id="members">
+      <tr>
+        <th>First Name</th>
+        <th>Last Name</th>
+        <th>Phone Number</th>
+      </tr>
+    </table>
+  </div>
+
+  <button id="signout-button" style="display: none;">Sign Out</button>
 
   <!--Make sure the form has the autocomplete function switched off:-->
   <!-- <form autocomplete="off" action="/action_page.php">
@@ -105,10 +113,9 @@
     if (isSignedIn) {
       authorizeButton.style.display = 'none';
       signoutButton.style.display = 'block';
-      submitButton.style.display = 'block';
+      submitButton.style.display = 'inline-block';
       getNames();
       listMajors();
-      // parseResult(result);
     } else {
       authorizeButton.style.display = 'block';
       signoutButton.style.display = 'none';
@@ -129,8 +136,11 @@
     gapi.auth2.getAuthInstance().signOut();
   }
 
-   function handleSubmitClick(event) {
-     updateSheet();
+  function handleKeypress(event){
+
+  }
+  function handleSubmitClick(event) {
+    updateSheet();
   }
 
   function updateSheet() {
@@ -177,6 +187,14 @@
     pre.appendChild(textContent);
   }
 
+  /** Fills table with appropriate data from the spreadsheet of names"
+  */
+  function fillTable(first, last, phone) {
+    var table = document.getElementById('members');
+    var row = '<tr><td>'+first+'</td><td>'+last+'</td><td>'+phone+'</td></tr>';
+    table.innerHTML += row;
+  }
+
   function parseResult(result){
     first = result.valueRanges[0].values.map(String);
     last = result.valueRanges[1].values.map(String);
@@ -221,16 +239,20 @@
   */
   function listMajors() {
     gapi.client.sheets.spreadsheets.values.get({
-      spreadsheetId: '1YY9dLjVEgaYl9HAvre1MvUHQUyxsGjNoKgAxYIRAaIA',
+      spreadsheetId: SPREADSHEET_ID,
       range: 'Form Responses 1!B:D',
     }).then(function(response) {
       var range = response.result;
       if (range.values.length > 0) {
         appendPre('Name, Major:');
-        for (i = 0; i < range.values.length; i++) {
+        for (i = 1; i < range.values.length; i++) {
           var row = range.values[i];
           // Print columns A and E, which correspond to indices 0 and 4.
-          appendPre(row[0] + ', ' + row[1] + ', ' + row[2]);
+          var first = row[0];
+          var last = row[1];
+          var phone = row[2];
+          //appendPre(row[0] + ', ' + row[1] + ', ' + row[2]);
+          fillTable(first, last, phone);
         }
       } else {
         appendPre('No data found.');
