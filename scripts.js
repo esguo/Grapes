@@ -105,35 +105,36 @@ function handleSubmitClick(event) {
   updateSheet();
 }
 
-function handleUpdateAttnClick(event) {
-  var conf = confirm("Update check-in sheet?");
-  if(conf == true){
-    attnText.placeholder = attnText.value;
-    updateAttendance(attnText.value);
-    attnText.value = "";
-  }
-}
-function handleUpdateMasterClick(event) {
-  var conf = confirm("Update master sheet?");
-  if(conf == true){
-    sheetText.placeholder = sheetText.value;
-    updateMaster(sheetText.value);
-    sheetText.value = "";
-  }
-}
-
-//Allows user to put in full url of google sheet
-function getIdFromUrl(url) { return url.match(/[-\w]{25,}/); }
 
 function updateAttendance(sheet_ID){
   SPREADSHEET_ATTN = getIdFromUrl(sheet_ID);
   alert("Updated!");
 }
 
-function updateMaster(sheet_ID){
-  SPREADSHEET_ID =  getIdFromUrl(sheet_ID);
+function updateM(sheet_ID){
+  SPREADSHEET_ID = getIdFromUrl(sheet_ID);
   alert("Updated!");
 }
+
+function handleUpdateAttnClick(event) {
+  var conf = confirm("Update check-in sheet?");
+  if(conf == true){
+    updateAttendance(attnText.value);
+    attnText.placeholder = SPREADSHEET_ATTN;
+    attnText.value = "";
+  }
+}
+function handleUpdateMasterClick(event) {
+  var conf = confirm("Update master sheet?");
+  if(conf == true){
+    updateM(sheetText.value);
+    sheetText.placeholder = SPREADSHEET_ID;
+    sheetText.value = "";
+  }
+}
+
+//Allows user to put in full url of google sheet
+function getIdFromUrl(url) { return url.match(/[-\w]{25,}/); }
 
 function updateSheet() {
   console.log(SPREADSHEET_ATTN);
