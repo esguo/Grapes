@@ -119,16 +119,16 @@ function updateM(sheet_ID){
 function handleUpdateAttnClick(event) {
   var conf = confirm("Update check-in sheet?");
   if(conf == true){
-    attnText.placeholder = attnText.value;
     updateAttendance(attnText.value);
+    attnText.placeholder = SPREADSHEET_ATTN;
     attnText.value = "";
   }
 }
 function handleUpdateMasterClick(event) {
   var conf = confirm("Update master sheet?");
   if(conf == true){
-    sheetText.placeholder = sheetText.value;
     updateM(sheetText.value);
+    sheetText.placeholder = SPREADSHEET_ID;
     sheetText.value = "";
   }
 }
