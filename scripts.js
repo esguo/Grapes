@@ -121,13 +121,17 @@ function handleUpdateMasterClick(event) {
     sheetText.value = "";
   }
 }
+
+//Allows user to put in full url of google sheet
+function getIdFromUrl(url) { return url.match(/[-\w]{25,}/); }
+
 function updateAttendance(sheet_ID){
-  SPREADSHEET_ATTN = sheet_ID;
+  SPREADSHEET_ATTN = getIdFromUrl(sheet_ID);
   alert("Updated!");
 }
 
 function updateMaster(sheet_ID){
-  SPREADSHEET_ID = sheet_ID;
+  SPREADSHEET_ID =  getIdFromUrl(sheet_ID);
   alert("Updated!");
 }
 
