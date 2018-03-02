@@ -1,8 +1,8 @@
-<!DOCTYPE html>
 <html>
 <head>
   <title>IAATK Prototype for Autocomplete</title>
   <meta charset='utf-8' />
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
   <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
   <link rel="stylesheet" type="text/css" href="styles.css">
   <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
@@ -22,11 +22,17 @@
 
 
 <body>
-  <h1>Smart Search Protoype</h1>
+  <div class="container">
+
+
+ <div class="jumbotron">
+  <img src="./img/IAATK-Orange.PNG" style="width: 100%;">
+  </div>
+  
 
   <!--Add buttons to initiate auth sequence and sign out-->
   <button id="authorize-button" style="display: none;">Authorize</button>
-  <div id="contents" style="display: none;">
+  <div id="contents" style="display: none;">  
     <div class="ui-widget">
       <label for="name">Search: </label>
       <input id="name">
@@ -34,12 +40,15 @@
     </div>
 
     <div style="overflow: auto; padding-top:10px">
-      <table id="members">
+      <table class="table table-dark table-bordered">
+        <thead class="thead-dark">
         <tr>
-          <th>First Name</th>
-          <th>Last Name</th>
-          <th>Phone Number</th>
+          <th scope="col"><strong>First Name</strong></th>
+          <th scope="col"><strong>Last Name</strong></th>
+          <th scope="col"><strong>Phone Number</strong></th>
         </tr>
+      </thead>
+      <tbody id="members"></tbody>
       </table>
     </div>
 
@@ -58,21 +67,11 @@
   </div>
   <button id="signout-button" style="display: none;">Sign Out</button>
 
-
-  <!--Make sure the form has the autocomplete function switched off:-->
-  <!-- <form autocomplete="off" action="/action_page.php">
-  <div class="autocomplete" style="width:300px;">
-  <input id="myInput" type="text" name="fName" placeholder="First Name">
 </div>
-<input type="submit">
-</form> -->
-
 <script src="scripts.js"></script>
 <script async defer src="https://apis.google.com/js/api.js"
 onload="this.onload=function(){};handleClientLoad()"
 onreadystatechange="if (this.readyState === 'complete') this.onload()">
 </script>
-
-
 </body>
 </html>
