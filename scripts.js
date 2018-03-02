@@ -105,6 +105,17 @@ function handleSubmitClick(event) {
   updateSheet();
 }
 
+
+function updateAttendance(sheet_ID){
+  SPREADSHEET_ATTN = getIdFromUrl(sheet_ID);
+  alert("Updated!");
+}
+
+function updateM(sheet_ID){
+  SPREADSHEET_ID = getIdFromUrl(sheet_ID);
+  alert("Updated!");
+}
+
 function handleUpdateAttnClick(event) {
   var conf = confirm("Update check-in sheet?");
   if(conf == true){
@@ -117,23 +128,13 @@ function handleUpdateMasterClick(event) {
   var conf = confirm("Update master sheet?");
   if(conf == true){
     sheetText.placeholder = sheetText.value;
-    updateMaster(sheetText.value);
+    updateM(sheetText.value);
     sheetText.value = "";
   }
 }
 
 //Allows user to put in full url of google sheet
 function getIdFromUrl(url) { return url.match(/[-\w]{25,}/); }
-
-function updateAttendance(sheet_ID){
-  SPREADSHEET_ATTN = getIdFromUrl(sheet_ID);
-  alert("Updated!");
-}
-
-function updateMaster(sheet_ID){
-  SPREADSHEET_ID =  getIdFromUrl(sheet_ID);
-  alert("Updated!");
-}
 
 function updateSheet() {
   console.log(SPREADSHEET_ATTN);
