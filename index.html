@@ -17,6 +17,12 @@
     padding: 10px;
     font-size: 16px;
   }
+
+  @media only screen and (max-width:768px) {
+        div.tbl{
+                  display: none  
+        } 
+  }      
   </style>
 </head>
 
@@ -38,19 +44,20 @@
       <button id="submit-button" style="display:none">Check In</button>
     </div>
 
-    <div id="tableNames" style="height: 40vh; overflow: auto; padding-top:10px">
-      <table class="table table-dark table-bordered">
-        <thead class="thead-dark">
-        <tr>
-          <th scope="col"><strong>First Name</strong></th>
-          <th scope="col"><strong>Last Name</strong></th>
-          <th scope="col"><strong>Phone Number</strong></th>
-        </tr>
-      </thead>
-      <tbody id="members"></tbody>
-      </table>
+    <div class="tbl">  
+        <div style="height: 40vh; overflow: auto; padding-top:10px">
+          <table class="table table-dark table-bordered">
+            <thead class="thead-dark">
+            <tr>
+              <th scope="col"><strong>First Name</strong></th>
+              <th scope="col"><strong>Last Name</strong></th>
+              <th scope="col"><strong>Phone Number</strong></th>
+            </tr>
+          </thead>
+          <tbody id="members"></tbody>
+          </table>
+        </div>
     </div>
-
     <div>
       <div class="ui-widget">
         <label for="attn_ID">Check-in Sheet: </label>
