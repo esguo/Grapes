@@ -7,6 +7,12 @@
   <link rel="stylesheet" type="text/css" href="styles.css">
   <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
   <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+  <script type="text/javascript">
+    if (window.location.protocol == "http:") {
+        var restOfUrl = window.location.href.substr(5);
+        window.location = "https:" + restOfUrl;
+    }
+  </script>
   <style>
   * {
     box-sizing: border-box;
@@ -21,9 +27,9 @@
 
   @media only screen and (max-width:768px) {
         div.tbl{
-                  display: none  
-        } 
-  } 
+                  display: none
+        }
+  }
   button {
   background: #fffcff;
   background-image: -webkit-linear-gradient(top, #fffcff, #e0e2e3);
@@ -39,7 +45,7 @@
   font-size: 25px;
   padding: 10px 20px 10px 20px;
   text-decoration: none;
-  margin: 4px;      
+  margin: 4px;
 }
 
 button:hover {
@@ -50,7 +56,7 @@ button:hover {
   background-image: -o-linear-gradient(top, #ffffff, #adb1b3);
   background-image: linear-gradient(to bottom, #ffffff, #adb1b3);
   text-decoration: none;
-}    
+}
   </style>
 </head>
 
@@ -72,7 +78,7 @@ button:hover {
       <button id="submit-button" style="display:none">Check In</button>
     </div>
 
-    <div class="tbl">  
+    <div class="tbl">
         <div style="height: 30vh; overflow: auto; padding-top:10px">
           <table class="table table-dark table-bordered">
             <thead class="thead-dark">
