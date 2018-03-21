@@ -130,6 +130,7 @@ function handleUpdateMasterClick(event) {
     updateM(sheetText.value);
     sheetText.placeholder = SPREADSHEET_ID;
     sheetText.value = "";
+    init();
   }
 }
 
@@ -191,6 +192,10 @@ function fillTable(first, last, phone) {
   table.innerHTML += row;
 }
 
+function clearTable(){
+  document.getElementById('members').innerHTML = "";
+}
+
 function parseResult(result){
   first = result.valueRanges[0].values.map(String);
   last = result.valueRanges[1].values.map(String);
@@ -213,6 +218,7 @@ function parseResult(result){
 }
 
 function getNames(){
+  users = [];
   gapi.client.sheets.spreadsheets.values.batchGet({
     spreadsheetId: SPREADSHEET_ID,
     ranges: ranges
@@ -220,7 +226,11 @@ function getNames(){
     var result = response.result;
     parseResult(result);
   });
+}
 
+function init(){
+  clearTable();
+  getNames();
 }
 
 /**
