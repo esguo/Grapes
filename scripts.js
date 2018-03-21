@@ -88,9 +88,6 @@ function updateSigninStatus(isSignedIn) {
 function handleAuthClick(event) {
   users = [];
   $('#members').empty();
-  var table = document.getElementById('members');
-  var row = '<tr><th>First Name</th><th>Last Name</th><th>Phone Number</th></tr>';
-  table.innerHTML += row;
   gapi.auth2.getAuthInstance().signIn();
 }
 
