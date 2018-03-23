@@ -96,13 +96,13 @@ function handleAuthClick(event) {
 }
 
 function save(){
-  localstorage.master = SPREADSHEET_ID;
-  localstorage.attn = SPREADSHEET_ATTN;
+  localStorage.master = SPREADSHEET_ID;
+  localStorage.attn = SPREADSHEET_ATTN;
 }
 
 function setSheet(){
-    SPREADSHEET_ID = localstorage.getItem('master');
-    SPREADSHEET_ATTN = localstorage.getItem('attn');
+    SPREADSHEET_ID = localStorage.getItem('master');
+    SPREADSHEET_ATTN = localStorage.getItem('attn');
 
     if (SPREADSHEET_ID.length === 0){
       SPREADSHEET_ID = '1YY9dLjVEgaYl9HAvre1MvUHQUyxsGjNoKgAxYIRAaIA';
