@@ -32,6 +32,6 @@ input {
   text-align: center;
 }
 
-#name {
+.ui-menu-item-wrapper {
   text-align: left;
 }
