@@ -29,5 +29,9 @@ input {
 }
 
 .ui-widget{
+  text-align: center;
+}
+
+#name {
   text-align: left;
-  }
+}
