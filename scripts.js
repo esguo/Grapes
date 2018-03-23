@@ -8,8 +8,8 @@ var DISCOVERY_DOCS = ["https://sheets.googleapis.com/$discovery/rest?version=v4"
 var SCOPES = "https://www.googleapis.com/auth/spreadsheets";
 
 
-var SPREADSHEET_ID = '1YY9dLjVEgaYl9HAvre1MvUHQUyxsGjNoKgAxYIRAaIA';
-var SPREADSHEET_ATTN = '16pJeS9ADQ_aCkWni8WREvP3tIRNkoAVK0N4K-l5MCmo';
+var SPREADSHEET_ID;
+var SPREADSHEET_ATTN;
 
 // Range names ...
 var ranges = [
@@ -26,9 +26,6 @@ var submitButton = document.getElementById('submit-button');
 var attnText = document.getElementById('attn_ID');
 var sheetText = document.getElementById('sheet_ID');
 var users = [];
-
-attnText.placeholder = SPREADSHEET_ATTN;
-sheetText.placeholder = SPREADSHEET_ID;
 
 document.getElementById("name").addEventListener("keyup", function(event){
   if (event.keyCode === 13) {
@@ -71,12 +68,12 @@ function initClient() {
 *  appropriately. After a sign-in, the API is called.
 */
 function updateSigninStatus(isSignedIn) {
-  setSheet();
   if (isSignedIn) {
     authorizeButton.style.display = 'none';
     document.getElementById('contents').style.display = 'block';
     signoutButton.style.display = 'block';
     submitButton.style.display = 'inline-block';
+    setSheet();
     getNames();
   } else {
     authorizeButton.style.display = 'block';
@@ -95,8 +92,11 @@ function handleAuthClick(event) {
 }
 
 function save(){
-  localStorage.master = SPREADSHEET_ID;
-  localStorage.attn = SPREADSHEET_ATTN;
+  localStorage.setItem('master', SPREADSHEET_ID);
+  localStorage.setItem('attn', SPREADSHEET_ATTN);
+
+  attnText.placeholder = SPREADSHEET_ATTN;
+  sheetText.placeholder = SPREADSHEET_ID;
 }
 
 function setSheet(){
@@ -109,6 +109,9 @@ function setSheet(){
     if(SPREADSHEET_ATTN == null){
       SPREADSHEET_ATTN = '16pJeS9ADQ_aCkWni8WREvP3tIRNkoAVK0N4K-l5MCmo';
     }
+
+    attnText.placeholder = SPREADSHEET_ATTN;
+    sheetText.placeholder = SPREADSHEET_ID;
 }
 
 /**
@@ -139,7 +142,6 @@ function handleUpdateAttnClick(event) {
   var conf = confirm("Update check-in sheet?");
   if(conf == true){
     updateAttendance(attnText.value);
-    attnText.placeholder = SPREADSHEET_ATTN;
     attnText.value = "";
     init();
   }
@@ -148,7 +150,6 @@ function handleUpdateMasterClick(event) {
   var conf = confirm("Update master sheet?");
   if(conf == true){
     updateM(sheetText.value);
-    sheetText.placeholder = SPREADSHEET_ID;
     sheetText.value = "";
     init();
   }
@@ -249,8 +250,11 @@ function getNames(){
 }
 
 function init(){
+  setSheet();
   clearTable();
   getNames();
+  console.log("CHECK IN" + SPREADSHEET_ATTN);
+  console.log("MASTER: " + SPREADSHEET_ID);
 }
 
 /**
