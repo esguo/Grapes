@@ -10,8 +10,6 @@ var SCOPES = "https://www.googleapis.com/auth/spreadsheets";
 
 var SPREADSHEET_ID = '1YY9dLjVEgaYl9HAvre1MvUHQUyxsGjNoKgAxYIRAaIA';
 var SPREADSHEET_ATTN = '16pJeS9ADQ_aCkWni8WREvP3tIRNkoAVK0N4K-l5MCmo';
-attnText.placeholder = SPREADSHEET_ATTN;
-sheetText.placeholder = SPREADSHEET_ID;
 
 // Range names ...
 var ranges = [
@@ -19,8 +17,6 @@ var ranges = [
   'Form Responses 1!C:C', //last name
   'Form Responses 1!D:D'  //phone number
 ];
-
-
 
 var authorizeButton = document.getElementById('authorize-button');
 var signoutButton = document.getElementById('signout-button');
@@ -30,6 +26,9 @@ var submitButton = document.getElementById('submit-button');
 var attnText = document.getElementById('attn_ID');
 var sheetText = document.getElementById('sheet_ID');
 var users = [];
+
+attnText.placeholder = SPREADSHEET_ATTN;
+sheetText.placeholder = SPREADSHEET_ID;
 
 document.getElementById("name").addEventListener("keyup", function(event){
   if (event.keyCode === 13) {
