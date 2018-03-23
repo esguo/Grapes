@@ -103,10 +103,10 @@ function setSheet(){
     SPREADSHEET_ID = localStorage.getItem('master');
     SPREADSHEET_ATTN = localStorage.getItem('attn');
 
-    if (SPREADSHEET_ID.length === 0){
+    if (SPREADSHEET_ID == null){
       SPREADSHEET_ID = '1YY9dLjVEgaYl9HAvre1MvUHQUyxsGjNoKgAxYIRAaIA';
     }
-    if(SPREADSHEET_ATTN.length === 0){
+    if(SPREADSHEET_ATTN == null){
       SPREADSHEET_ATTN = '16pJeS9ADQ_aCkWni8WREvP3tIRNkoAVK0N4K-l5MCmo';
     }
 }
