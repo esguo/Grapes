@@ -9,6 +9,10 @@ var SCOPES = "https://www.googleapis.com/auth/spreadsheets";
 
 
 var SPREADSHEET_ID = '1YY9dLjVEgaYl9HAvre1MvUHQUyxsGjNoKgAxYIRAaIA';
+var SPREADSHEET_ATTN = '16pJeS9ADQ_aCkWni8WREvP3tIRNkoAVK0N4K-l5MCmo';
+attnText.placeholder = SPREADSHEET_ATTN;
+sheetText.placeholder = SPREADSHEET_ID;
+
 // Range names ...
 var ranges = [
   'Form Responses 1!B:B', //first name
@@ -16,7 +20,7 @@ var ranges = [
   'Form Responses 1!D:D'  //phone number
 ];
 
-var SPREADSHEET_ATTN = '16pJeS9ADQ_aCkWni8WREvP3tIRNkoAVK0N4K-l5MCmo';
+
 
 var authorizeButton = document.getElementById('authorize-button');
 var signoutButton = document.getElementById('signout-button');
@@ -26,8 +30,7 @@ var submitButton = document.getElementById('submit-button');
 var attnText = document.getElementById('attn_ID');
 var sheetText = document.getElementById('sheet_ID');
 var users = [];
-attnText.placeholder = SPREADSHEET_ATTN;
-sheetText.placeholder = SPREADSHEET_ID;
+
 document.getElementById("name").addEventListener("keyup", function(event){
   if (event.keyCode === 13) {
     submitButton.click();
@@ -69,6 +72,7 @@ function initClient() {
 *  appropriately. After a sign-in, the API is called.
 */
 function updateSigninStatus(isSignedIn) {
+  setSheet();
   if (isSignedIn) {
     authorizeButton.style.display = 'none';
     document.getElementById('contents').style.display = 'block';
@@ -91,6 +95,23 @@ function handleAuthClick(event) {
   gapi.auth2.getAuthInstance().signIn();
 }
 
+function save(){
+  localstorage.master = SPREADSHEET_ID;
+  localstorage.attn = SPREADSHEET_ATTN;
+}
+
+function setSheet(){
+    SPREADSHEET_ID = localstorage.getItem('master');
+    SPREADSHEET_ATTN = localstorage.getItem('attn');
+
+    if (SPREADSHEET_ID.length === 0){
+      SPREADSHEET_ID = '1YY9dLjVEgaYl9HAvre1MvUHQUyxsGjNoKgAxYIRAaIA';
+    }
+    if(SPREADSHEET_ATTN.length === 0){
+      SPREADSHEET_ATTN = '16pJeS9ADQ_aCkWni8WREvP3tIRNkoAVK0N4K-l5MCmo';
+    }
+}
+
 /**
 *  Sign out the user upon button click.
 */
@@ -105,11 +126,13 @@ function handleSubmitClick(event) {
 
 function updateAttendance(sheet_ID){
   SPREADSHEET_ATTN = getIdFromUrl(sheet_ID);
+  save();
   alert("Updated!");
 }
 
 function updateM(sheet_ID){
   SPREADSHEET_ID = getIdFromUrl(sheet_ID);
+  save();
   alert("Updated!");
 }
 
@@ -119,6 +142,7 @@ function handleUpdateAttnClick(event) {
     updateAttendance(attnText.value);
     attnText.placeholder = SPREADSHEET_ATTN;
     attnText.value = "";
+    init();
   }
 }
 function handleUpdateMasterClick(event) {
